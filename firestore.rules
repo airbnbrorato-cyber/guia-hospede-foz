@@ -1,0 +1,27 @@
+﻿rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Conteúdo público do guia do hóspede (leitura livre, escrita apenas admin autenticado)
+    match /content/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Configurações básicas da acomodação (leitura livre para Wi-Fi e dados da casa, escrita apenas admin)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Dados financeiros e reservas sensíveis (ACESSO ESTATALMENTE RESTRITO AO ADMIN AUTENTICADO)
+    match /bookings/{bookingId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Despesas do imóvel (ACESSO ESTATALMENTE RESTRITO AO ADMIN AUTENTICADO)
+    match /expenses/{expenseId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

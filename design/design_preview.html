@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Digital do Hóspede - Refúgio das Cataratas</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts: Playfair Display (Serifada Elegante) e Plus Jakarta Sans (Clean/Moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#FAF7F2',        /* Nude suave acolhedor */
+              surface: '#FFFFFF',   /* Branco para cards */
+              surfaceAlt: '#F5EFEB',/* Argila clara / Nude alt */
+              primary: '#C2847A',   /* Rosé / Terracota refinado */
+              primaryHover: '#B17268',
+              primaryDark: '#8F5148',
+              textMain: '#2C221E',  /* Marrom escuro profundo */
+              textMuted: '#6B5E57', /* Marrom suave / Neutro */
+              border: '#EAE2DA'     /* Borda suave */
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(194, 132, 122, 0.08), 0 2px 6px -1px rgba(44, 34, 30, 0.04)',
+            'card': '0 10px 30px -5px rgba(44, 34, 30, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #2C221E;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #EAE2DA;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center selection:bg-brand-primary selection:text-white">
+
+  <!-- Container Mobile-first centralizado em telas maiores -->
+  <div class="w-full max-w-md min-h-screen bg-brand-bg flex flex-col pb-16 relative shadow-2xl md:my-6 md:rounded-[36px] md:overflow-hidden md:border md:border-brand-border">
+    
+    <!-- Hero / Header com Imagem de Boas-Vindas -->
+    <header class="relative w-full h-72 overflow-hidden">
+      <!-- Imagem de fundo acolhedora do imóvel / Foz -->
+      <img 
+        src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" 
+        alt="Refúgio das Cataratas" 
+        class="w-full h-full object-cover brightness-[0.88]"
+      />
+      
+      <!-- Gradiente elegante -->
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-black/30"></div>
+      
+      <!-- Tag / Badge Superior -->
+      <div class="absolute top-5 left-5 right-5 flex justify-between items-center">
+        <span class="px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-brand-textMain text-xs font-semibold tracking-wider uppercase shadow-sm">
+          Guia do Hóspede
+        </span>
+        <a href="#contato" class="w-9 h-9 rounded-full bg-white/85 backdrop-blur-md flex items-center justify-center text-brand-primary hover:bg-white transition-all shadow-sm">
+          <i data-lucide="phone-call" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Título de Boas-Vindas -->
+      <div class="absolute bottom-4 left-6 right-6">
+        <p class="text-xs font-medium text-brand-primary uppercase tracking-widest mb-1">Foz do Iguaçu • PR</p>
+        <h1 class="font-serif text-3xl font-bold text-brand-textMain leading-tight">
+          Refúgio das Cataratas
+        </h1>
+        <p class="text-xs text-brand-textMuted mt-1">Sinta-se em casa no seu refúgio de paz e aconchego.</p>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="px-5 -mt-2 space-y-6">
+
+      <!-- Card de Acesso Rápido (Wi-Fi e Horários) -->
+      <section class="bg-brand-surface rounded-2xl p-4 border border-brand-border shadow-soft">
+        <div class="grid grid-cols-2 gap-3 divide-x divide-brand-border">
+          <!-- Wi-Fi -->
+          <div class="pr-2 flex items-start space-x-3">
+            <div class="p-2 rounded-xl bg-brand-surfaceAlt text-brand-primary flex-shrink-0">
+              <i data-lucide="wifi" class="w-5 h-5"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-brand-textMuted">Wi-Fi da Casa</p>
+              <p class="text-xs font-bold text-brand-textMain truncate">Refugio_Guest_5G</p>
+              <button onclick="copiarSenha()" class="text-[10px] text-brand-primary font-medium hover:underline flex items-center gap-1 mt-0.5">
+                <i data-lucide="copy" class="w-3 h-3"></i> Copiar senha
+              </button>
+            </div>
+          </div>
+
+          <!-- Check-in / Out -->
+          <div class="pl-3 flex items-start space-x-3">
+            <div class="p-2 rounded-xl bg-brand-surfaceAlt text-brand-primary flex-shrink-0">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-brand-textMuted">Horários</p>
+              <p class="text-xs font-medium text-brand-textMain">In: <strong class="font-bold">15:00</strong></p>
+              <p class="text-xs font-medium text-brand-textMain">Out: <strong class="font-bold">11:00</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grade do Menu de Ícones (18 Seções) -->
+      <section>
+        <div class="flex items-center justify-between mb-3 px-1">
+          <h2 class="font-serif text-lg font-bold text-brand-textMain">Explore o seu Guia</h2>
+          <span class="text-[11px] text-brand-textMuted">18 seções</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          
+          <!-- 1. Check-in / Check-out -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="key-round" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Check-in & Out</span>
+          </button>
+
+          <!-- 2. Como Chegar -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="map-pin" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Como Chegar</span>
+          </button>
+
+          <!-- 3. Wi-Fi -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="wifi" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Wi-Fi & Senhas</span>
+          </button>
+
+          <!-- 4. A Casa -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="home" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">A Casa</span>
+          </button>
+
+          <!-- 5. Regras da Casa -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Regras da Casa</span>
+          </button>
+
+          <!-- 6. Importante -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="alert-circle" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Importante</span>
+          </button>
+
+          <!-- 7. Amenidades -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Amenidades</span>
+          </button>
+
+          <!-- 8. Como se Locomover -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="car" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Locomoção</span>
+          </button>
+
+          <!-- 9. Perguntas Frequentes -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="help-circle" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Dúvidas Freq.</span>
+          </button>
+
+          <!-- 10. Cafés e Padarias -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="coffee" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Cafés & Pães</span>
+          </button>
+
+          <!-- 11. Restaurantes Locais -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="utensils" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Restaurantes</span>
+          </button>
+
+          <!-- 12. Bares -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="wine" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Bares & Drinks</span>
+          </button>
+
+          <!-- 13. Lugares Mais Próximos -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="navigation" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Mais Próximos</span>
+          </button>
+
+          <!-- 14. Coisas para Fazer (DESTACADO COMO ATIVO PARA A PRÉVIA) -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-primary text-white border border-brand-primaryDark shadow-md transition-all text-center scale-[1.02] ring-2 ring-brand-primary/30">
+            <div class="w-11 h-11 rounded-xl bg-white/20 text-white flex items-center justify-center mb-2">
+              <i data-lucide="compass" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-white leading-snug">O Que Fazer</span>
+          </button>
+
+          <!-- 15. Emergência -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="shield-alert" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Emergência</span>
+          </button>
+
+          <!-- 16. Antes de Partir -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="door-closed" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Antes de Partir</span>
+          </button>
+
+          <!-- 17. Avaliação -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="star" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Avaliação</span>
+          </button>
+
+          <!-- 18. Contato -->
+          <button class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-primary/50 hover:bg-brand-surfaceAlt/60 transition-all text-center group shadow-sm">
+            <div class="w-11 h-11 rounded-xl bg-brand-surfaceAlt text-brand-primary flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-medium text-brand-textMain leading-snug">Fale Conosco</span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- SEÇÃO INTERNA EXPANDIDA PARA PRÉVIA: "Coisas para Fazer em Foz" -->
+      <section class="mt-8 pt-6 border-t border-brand-border space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[11px] font-semibold text-brand-primary uppercase tracking-widest">Seção Aberta</span>
+            <h2 class="font-serif text-2xl font-bold text-brand-textMain flex items-center gap-2">
+              <i data-lucide="compass" class="w-6 h-6 text-brand-primary"></i>
+              Coisas para Fazer
+            </h2>
+          </div>
+          <span class="px-2.5 py-1 bg-brand-surfaceAlt text-brand-textMuted rounded-full text-xs font-medium">3 atrações</span>
+        </div>
+
+        <p class="text-xs text-brand-textMuted leading-relaxed">
+          Selecionamos as melhores atrações da Terra das Cataratas para você aproveitar cada momento da sua estadia com conforto e tranquilidade.
+        </p>
+
+        <!-- Cards das Atrações de Foz do Iguaçu -->
+        <div class="space-y-4 pt-1">
+          
+          <!-- Card 1: Cataratas do Iguaçu -->
+          <article class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border shadow-card group transition-all hover:shadow-lg">
+            <div class="relative h-44 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80" 
+                alt="Cataratas do Iguaçu" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-brand-primary text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                Imperdível
+              </span>
+              <div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px]">
+                <i data-lucide="map-pin" class="w-3 h-3 text-brand-primary"></i>
+                <span>Parque Nacional • 20 min de carro</span>
+              </div>
+            </div>
+            
+            <div class="p-4 space-y-2">
+              <h3 class="font-serif text-lg font-bold text-brand-textMain">Cataratas do Iguaçu</h3>
+              <p class="text-xs text-brand-textMuted leading-relaxed">
+                Uma das 7 Maravilhas da Natureza. Recomendamos comprar o ingresso com antecedência e fazer o passeio do Macuco Safari se quiser sentir a força da água bem de perto.
+              </p>
+              <div class="pt-2 flex items-center justify-between">
+                <span class="text-[11px] font-medium text-brand-textMuted">Horário: 09:00 às 16:00</span>
+                <a href="https://cataratasdoiguacu.com.br" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-primary hover:text-brand-primaryDark transition-colors">
+                  Comprar ingresso <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Parque das Aves -->
+          <article class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border shadow-card group transition-all hover:shadow-lg">
+            <div class="relative h-44 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1550853024-fae8cd4be47f?auto=format&fit=crop&w=800&q=80" 
+                alt="Parque das Aves" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-brand-surfaceAlt text-brand-textMain text-[10px] font-bold uppercase tracking-wider border border-brand-border shadow-sm">
+                Ao lado das Cataratas
+              </span>
+              <div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px]">
+                <i data-lucide="map-pin" class="w-3 h-3 text-brand-primary"></i>
+                <span>Av. das Cataratas • 20 min</span>
+              </div>
+            </div>
+            
+            <div class="p-4 space-y-2">
+              <h3 class="font-serif text-lg font-bold text-brand-textMain">Parque das Aves</h3>
+              <p class="text-xs text-brand-textMuted leading-relaxed">
+                Centro de resgate e conservação da Mata Atlântica. Você entra em viveiros gigantescos com tucanos, araras e flamingos. Ideal para combinar no mesmo dia das Cataratas.
+              </p>
+              <div class="pt-2 flex items-center justify-between">
+                <span class="text-[11px] font-medium text-brand-textMuted">Horário: 08:30 às 16:30</span>
+                <a href="https://parquedasaves.com.br" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-primary hover:text-brand-primaryDark transition-colors">
+                  Ver detalhes <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Usina de Itaipu Binacional -->
+          <article class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border shadow-card group transition-all hover:shadow-lg">
+            <div class="relative h-44 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" 
+                alt="Usina de Itaipu" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-brand-surfaceAlt text-brand-textMain text-[10px] font-bold uppercase tracking-wider border border-brand-border shadow-sm">
+                Engenharia Mundial
+              </span>
+              <div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px]">
+                <i data-lucide="map-pin" class="w-3 h-3 text-brand-primary"></i>
+                <span>Av. Tancredo Neves • 15 min</span>
+              </div>
+            </div>
+            
+            <div class="p-4 space-y-2">
+              <h3 class="font-serif text-lg font-bold text-brand-textMain">Usina Hidrelétrica de Itaipu</h3>
+              <p class="text-xs text-brand-textMuted leading-relaxed">
+                A maior geradora de energia limpa do planeta. Não perca a Visita Panorâmica e, se puder, o espetáculo da Iluminação Noturna da barragem nos finais de semana.
+              </p>
+              <div class="pt-2 flex items-center justify-between">
+                <span class="text-[11px] font-medium text-brand-textMuted">Passeio diurno & noturno</span>
+                <a href="https://turismoitaipu.com.br" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-primary hover:text-brand-primaryDark transition-colors">
+                  Ingressos Itaipu <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Rodapé do Guia -->
+      <footer id="contato" class="pt-8 pb-4 text-center space-y-3">
+        <div class="inline-flex items-center justify-center p-3 rounded-2xl bg-brand-surfaceAlt text-brand-primary border border-brand-border mb-1">
+          <i data-lucide="heart" class="w-5 h-5 fill-brand-primary/20"></i>
+        </div>
+        <h3 class="font-serif text-lg font-bold text-brand-textMain">Precisa de ajuda com a casa?</h3>
+        <p class="text-xs text-brand-textMuted max-w-xs mx-auto">
+          Sua anfitriã está sempre à disposição no WhatsApp para tornar sua viagem memorável.
+        </p>
+        <a 
+          href="https://wa.me/5545999999999" 
+          target="_blank"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-primary hover:bg-brand-primaryHover text-white text-xs font-semibold shadow-md hover:shadow-lg transition-all"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          Falar no WhatsApp com o Anfitrião
+        </a>
+        <p class="text-[10px] text-brand-textMuted/70 pt-4">
+          © 2026 Refúgio das Cataratas • Feito para o seu bem-estar
+        </p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script>
+    // Inicializar os ícones Lucide
+    lucide.createIcons();
+
+    function copiarSenha() {
+      navigator.clipboard.writeText("Cataratas@2026");
+      alert("Senha do Wi-Fi copiada para a área de transferência!");
+    }
+  </script>
+</body>
+</html>
