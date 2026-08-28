@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Mail, ArrowLeft, KeyRound, Sparkles } from 'lucide-react';
-import { auth, isFirebaseConfigured } from '../../services/firebase';
+import { Lock, Mail, ArrowLeft, KeyRound } from 'lucide-react';
+import { auth } from '../../services/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { dataService } from '../../services/dbService';
 
@@ -18,27 +18,23 @@ export const Login = () => {
     setLoading(true);
 
     try {
-      if (isFirebaseConfigured) {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
+      // Autenticação oficial no Firebase Auth
+      await signInWithEmailAndPassword(auth, email.trim(), password);
       dataService.setAuthStatus(true);
       navigate('/admin');
     } catch (err) {
-      console.error('Erro no login Firebase:', err);
-      if (email === 'anfitriao@foz.com' || email === 'admin@airbnb.com' || !isFirebaseConfigured) {
-        dataService.setAuthStatus(true);
-        navigate('/admin');
+      console.error('Erro de autenticação no Firebase:', err.code, err.message);
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
+        setError('E-mail ou senha incorretos. Verifique suas credenciais no Firebase.');
+      } else if (err.code === 'auth/too-many-requests') {
+        setError('Muitas tentativas sem sucesso. Aguarde alguns minutos e tente novamente.');
       } else {
-        setError('E-mail ou senha incorretos. Tente novamente.');
+        setError('Falha ao autenticar. Verifique seus dados e tente novamente.');
       }
+      dataService.setAuthStatus(false);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleDemoAccess = () => {
-    dataService.setAuthStatus(true);
-    navigate('/admin');
   };
 
   return (
@@ -53,12 +49,12 @@ export const Login = () => {
             Painel do Anfitrião
           </h1>
           <p className="text-xs text-[#6B5E57]">
-            Acesso exclusivo para gestão financeira e do guia.
+            Acesso exclusivo para anfitriões autorizados.
           </p>
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs">
+          <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs leading-relaxed font-medium">
             {error}
           </div>
         )}
@@ -75,7 +71,7 @@ export const Login = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="anfitriao@exemplo.com"
+                placeholder="seu-email@gmail.com"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#EAE2DA] text-xs text-[#2C221E] focus:outline-none focus:border-[#C2847A] focus:ring-1 focus:ring-[#C2847A]"
               />
             </div>
@@ -101,7 +97,7 @@ export const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#C2847A] hover:bg-[#B17268] text-white text-xs font-semibold rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+            className="w-full py-3 bg-[#C2847A] hover:bg-[#B17268] text-white text-xs font-semibold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 mt-2"
           >
             {loading ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -113,21 +109,10 @@ export const Login = () => {
 
         <div className="pt-2 border-t border-[#EAE2DA] text-center">
           <button
-            onClick={handleDemoAccess}
-            type="button"
-            className="w-full py-2.5 bg-[#F5EFEB] hover:bg-[#EAE2DA] text-[#2C221E] text-xs font-medium rounded-xl transition-all flex items-center justify-center gap-1.5"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#C2847A]" />
-            Entrar em Modo Demonstração (1 Clique)
-          </button>
-        </div>
-
-        <div className="text-center">
-          <button
             onClick={() => navigate('/')}
-            className="text-xs text-[#6B5E57] hover:text-[#C2847A] inline-flex items-center gap-1"
+            className="text-xs text-[#6B5E57] hover:text-[#C2847A] inline-flex items-center gap-1 font-medium"
           >
-            <ArrowLeft className="w-3 h-3" /> Voltar ao Guia do Hóspede
+            <ArrowLeft className="w-3.5 h-3.5" /> Voltar ao Guia do Hóspede
           </button>
         </div>
 
