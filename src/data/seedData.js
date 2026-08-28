@@ -2,16 +2,16 @@
 
 export const initialSettings = {
   id: 'general',
-  houseName: 'Refúgio das Cataratas',
+  houseName: 'Airbnb Rorato',
   tagline: 'Seu refúgio de paz, conforto e aconchego em Foz do Iguaçu.',
   city: 'Foz do Iguaçu • PR',
-  wifiName: 'Refugio_Guest_5G',
+  wifiName: 'Airbnb_Rorato_5G',
   wifiPassword: 'Cataratas@2026',
   checkInTime: '15:00',
   checkOutTime: '11:00',
-  hostName: 'Mariana Silva',
-  hostPhone: '+55 45 99999-8888',
-  hostWhatsapp: '5545999998888',
+  hostName: 'Rorato',
+  hostPhone: '+55 45 92000-7260',
+  hostWhatsapp: '5545920007260',
   address: 'Rua das Palmeiras, 120 - Vila Yolanda, Foz do Iguaçu - PR',
   welcomeMessage: 'É uma imensa alegria receber você! Preparamos este guia com todo o carinho para que sua estadia seja inesquecível e repleta de boas memórias.'
 };
@@ -48,7 +48,7 @@ export const initialSections = [
     coverImage: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80',
     lastUpdated: '2026-08-26',
     description: 'Rede de alta velocidade para trabalho e streaming.',
-    text: "### Rede Principal de Alta Velocidade (Fibra 500 Mega)\n\n- **Rede:** Refugio_Guest_5G\n- **Senha:** Cataratas@2026\n\nO roteador está estrategicamente posicionado na sala de estar, cobrindo todos os cômodos e a varanda externa."
+    text: "### Rede Principal de Alta Velocidade (Fibra 500 Mega)\n\n- **Rede:** Airbnb_Rorato_5G\n- **Senha:** Cataratas@2026\n\nO roteador está estrategicamente posicionado na sala de estar, cobrindo todos os cômodos e a varanda externa."
   },
   {
     id: 'a-casa',
@@ -289,7 +289,7 @@ export const initialSections = [
     coverImage: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=400&q=80',
     lastUpdated: '2026-08-26',
     description: 'Estamos aqui para o que você precisar.',
-    text: "### Anfitriã: Mariana Silva\n- **WhatsApp:** +55 (45) 99999-8888\n- **E-mail:** anfitriao@refugiodascataratas.com.br\n- **Atendimento:** 07:00 às 22:00 (emergências 24h)"
+    text: "### Anfitriã: Rorato\n- **WhatsApp:** +55 (45) 92000-7260\n- **E-mail:** contato@airbnbrorato.com.br\n- **Atendimento:** 07:00 às 22:00 (emergências 24h)"
   }
 ];
 

@@ -5,8 +5,8 @@ import {
 import { initialSettings, initialSections, initialBookings, initialExpenses } from '../data/seedData';
 
 const STORAGE_KEYS = {
-  SETTINGS: 'airbnb_foz_settings_v3',
-  CONTENT: 'airbnb_foz_content_v3',
+  SETTINGS: 'airbnb_foz_settings_v4',
+  CONTENT: 'airbnb_foz_content_v4',
   BOOKINGS: 'airbnb_foz_bookings_v3',
   EXPENSES: 'airbnb_foz_expenses_v3',
   AUTH: 'airbnb_foz_admin_auth'
