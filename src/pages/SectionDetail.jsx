@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Heart, Sparkles } from 'lucide-react';
 import { dataService } from '../services/dbService';
 import { DynamicIcon } from '../components/DynamicIcon';
+import { LanguageTranslator } from '../components/LanguageTranslator';
 
 export const SectionDetail = () => {
   const { id } = useParams();
@@ -64,14 +65,14 @@ export const SectionDetail = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-black/20 to-black/40"></div>
 
             {/* Botão de Voltar Flutuante */}
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
               <Link
                 to="/"
                 className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-white/40 flex items-center justify-center text-[#2C221E] hover:bg-white transition-all shadow-md"
               >
                 <ArrowLeft className="w-4 h-4" />
               </Link>
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-[11px] font-medium shadow-xs">
+              <div className="flex items-center gap-2"><LanguageTranslator />
                 <DynamicIcon name={section.icon} className="w-3.5 h-3.5 text-[#C2847A]" />
                 <span className="capitalize">{section.category || 'Guia'}</span>
               </div>
@@ -104,7 +105,7 @@ export const SectionDetail = () => {
                 {section.title}
               </span>
             </div>
-            <div className="w-9"></div>
+            <LanguageTranslator />
           </header>
         )}
 

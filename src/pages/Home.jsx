@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Wifi, Clock, Copy, Check, MessageCircle, PhoneCall, Heart, Lock } from 'lucide-react';
 import { dataService } from '../services/dbService';
 import { IconCard } from '../components/IconCard';
+import { LanguageTranslator } from '../components/LanguageTranslator';
 
 export const Home = () => {
   const [settings, setSettings] = useState(null);
@@ -60,7 +61,8 @@ export const Home = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-black/30"></div>
           
-          <div className="absolute top-5 left-5 right-5 flex justify-between items-center">
+          <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
+            <LanguageTranslator />
             <span className="px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-[#2C221E] text-xs font-semibold tracking-wider uppercase shadow-sm">
               Guia do Hóspede
             </span>
