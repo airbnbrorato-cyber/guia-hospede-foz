@@ -5,10 +5,10 @@ import {
 import { initialSettings, initialSections, initialBookings, initialExpenses } from '../data/seedData';
 
 const STORAGE_KEYS = {
-  SETTINGS: 'airbnb_foz_settings_v4',
-  CONTENT: 'airbnb_foz_content_v4',
-  BOOKINGS: 'airbnb_foz_bookings_v3',
-  EXPENSES: 'airbnb_foz_expenses_v3',
+  SETTINGS: 'airbnb_foz_settings_v5',
+  CONTENT: 'airbnb_foz_content_v5',
+  BOOKINGS: 'airbnb_foz_bookings_v5',
+  EXPENSES: 'airbnb_foz_expenses_v5',
   AUTH: 'airbnb_foz_admin_auth'
 };
 
@@ -35,7 +35,9 @@ export const dataService = {
       try {
         const docRef = doc(db, 'settings', 'general');
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) return docSnap.data();
+        if (docSnap.exists() && Object.keys(docSnap.data()).length > 0) {
+          return { ...initialSettings, ...docSnap.data() };
+        }
       } catch (err) {
         console.warn('Erro ao ler settings do Firestore:', err);
       }
@@ -58,24 +60,51 @@ export const dataService = {
   },
 
   async getSections() {
+    let remoteSections = [];
     if (isFirebaseConfigured) {
       try {
         const colRef = collection(db, 'content');
         const snap = await getDocs(colRef);
         if (!snap.empty) {
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          remoteSections = snap.docs.map(d => ({ id: d.id, ...d.data() }));
         }
       } catch (err) {
         console.warn('Erro ao ler content do Firestore:', err);
       }
     }
+
+    // Se tiver no Firestore, mescla com as seções base para garantir que NENHUMA das 18 seções fique faltando
+    if (remoteSections.length > 0) {
+      const mergedMap = new Map();
+      // 1. Adiciona todas as seções base (18 seções completas)
+      initialSections.forEach(s => mergedMap.set(s.id, s));
+      // 2. Sobrescreve com as edições do Firestore
+      remoteSections.forEach(s => mergedMap.set(s.id, { ...(mergedMap.get(s.id) || {}), ...s }));
+      return Array.from(mergedMap.values());
+    }
+
     const local = localStorage.getItem(STORAGE_KEYS.CONTENT);
-    return local ? JSON.parse(local) : initialSections;
+    if (local) {
+      try {
+        const parsed = JSON.parse(local);
+        if (Array.isArray(parsed) && parsed.length >= initialSections.length) {
+          return parsed;
+        }
+        // Se o localStorage tiver menos seções, mescla com as 18 completas
+        const mergedMap = new Map();
+        initialSections.forEach(s => mergedMap.set(s.id, s));
+        if (Array.isArray(parsed)) {
+          parsed.forEach(s => mergedMap.set(s.id, { ...(mergedMap.get(s.id) || {}), ...s }));
+        }
+        return Array.from(mergedMap.values());
+      } catch (e) {}
+    }
+    return initialSections;
   },
 
   async getSectionById(id) {
     const sections = await this.getSections();
-    return sections.find(s => s.id === id) || null;
+    return sections.find(s => s.id === id) || initialSections.find(s => s.id === id) || null;
   },
 
   async updateSection(id, updatedData) {
@@ -102,7 +131,9 @@ export const dataService = {
     if (isFirebaseConfigured && auth.currentUser) {
       try {
         const snap = await getDocs(collection(db, 'bookings'));
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (!snap.empty) {
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        }
       } catch (err) {
         console.warn('Erro ao ler bookings do Firestore:', err);
       }
@@ -155,7 +186,9 @@ export const dataService = {
     if (isFirebaseConfigured && auth.currentUser) {
       try {
         const snap = await getDocs(collection(db, 'expenses'));
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (!snap.empty) {
+          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        }
       } catch (err) {
         console.warn('Erro ao ler despesas do Firestore:', err);
       }
